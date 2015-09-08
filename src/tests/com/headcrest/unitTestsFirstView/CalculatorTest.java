@@ -1,5 +1,6 @@
-package com.headcrest;
+package com.headcrest.unitTestsFirstView;
 
+import com.headcrest.unitTestsFirstView.Calculator;
 import org.junit.*;
 import static org.junit.Assert.*;
 

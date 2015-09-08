@@ -1,4 +1,4 @@
-package com.headcrest;
+package com.headcrest.unitTestsFirstView;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

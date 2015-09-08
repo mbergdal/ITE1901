@@ -1,4 +1,4 @@
-package com.headcrest;
+package com.headcrest.unitTestsFirstView;
 
 /**
  * Created by mbe on 24/08/15.
