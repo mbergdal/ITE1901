@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -37,10 +35,10 @@ public class ToDoAppTests {
     @Test
     public void addItems_AddmultipleItemsInOneGo_AssertCorrectNumberOfItems(){
         int n = 100000;
-        Map<String, ToDoItem> existing = new HashMap<>();
+        List<ToDoItem> existing = new ArrayList<>();
 
         for (int i=0; i < n; i++){
-            existing.put(Integer.toString(i+1), new ToDoItem());
+            existing.add(new ToDoItem());
         }
 
         app.addItems(existing);
@@ -51,13 +49,14 @@ public class ToDoAppTests {
     @Test
     public void removeItemTitled_RemoveAnItemWithAGivenTitle_RemovesTheCorrectItem(){
         int n = 3;
-        Map<String, ToDoItem> existing = new HashMap<>();
+        List<ToDoItem> existing = new ArrayList<>();
 
         for (int i=0; i < n; i++){
-            existing.put(Integer.toString(i+1), new ToDoItem(Integer.toString(i+1)));
+            existing.add(new ToDoItem(Integer.toString(i+1)));
         }
 
         app.addItems(existing);
+
         app.removeItemTitled("1");
 
         List<String> allItemTitles = app.getAllItemTitles();
@@ -69,10 +68,10 @@ public class ToDoAppTests {
     @Test
     public void getItemsSortedOnPriority_getsItemsSortedAscending_CorrectlySorted() throws InvalidArgumentException {
         int n = 3;
-        Map<String, ToDoItem> existing = new HashMap<>();
+        List<ToDoItem> existing = new ArrayList<>();
 
         for (int i=0; i < n; i++){
-            existing.put(Integer.toString(i + 1), new ToDoItem(Integer.toString(i + 1), i));
+            existing.add(new ToDoItem(Integer.toString(i+1), i));
         }
 
         app.addItems(existing);
@@ -83,10 +82,10 @@ public class ToDoAppTests {
     @Test
     public void getItemsSortedOnPriority_getsItemsSortedDescending_CorrectlySorted() {
         int n = 3;
-        Map<String, ToDoItem> existing = new HashMap<>();
+        List<ToDoItem> existing = new ArrayList<>();
 
         for (int i=0; i < n; i++){
-            existing.put(Integer.toString(i + 1), new ToDoItem(Integer.toString(i + 1), i));
+            existing.add(new ToDoItem(Integer.toString(i+1), i));
         }
 
         app.addItems(existing);

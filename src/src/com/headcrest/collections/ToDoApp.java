@@ -1,17 +1,18 @@
 package com.headcrest.collections;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class ToDoApp {
 
-    private Map<String, ToDoItem> items;
+    private List<ToDoItem> items;
 
     public ToDoApp() {
-        this.items = new HashMap<>();
+        this.items = new LinkedList<>();
     }
 
     public void addItem(ToDoItem toDoItem) {
-        this.items.put(toDoItem.getTitle(), toDoItem);
+        this.items.add(toDoItem);
     }
 
     public int getNumberOfItems() {
@@ -19,24 +20,41 @@ public class ToDoApp {
     }
 
     public void removeItem(ToDoItem toDoItem) {
-        items.remove(toDoItem.getTitle());
+        items.remove(toDoItem);
     }
 
-    public void addItems(Map<String, ToDoItem> existing) {
-        items.putAll(existing);
+    public void addItems(List<ToDoItem> existing) {
+        items.addAll(existing);
     }
 
     public void removeItemTitled(String title) {
-        items.remove(title);
+        //This is not possible. changes an collection while iterating...
+//        for (ToDoItem item : items) {
+//            if (item.getTitle().equals(title))
+//                items.remove(item);
+//        }
+
+        //items.removeIf(toDoItem -> toDoItem.getTitle().equals(title));
+
+        items.removeIf(new Predicate<ToDoItem>() {
+            @Override
+            public boolean test(ToDoItem toDoItem) {
+                return toDoItem.getTitle().equals(title);
+            }
+        });
     }
 
     public List<String> getAllItemTitles() {
-        return new ArrayList(items.keySet());
+        List<String> allItemTitles = new ArrayList<>();
+        for (ToDoItem item : items) {
+            allItemTitles.add(item.getTitle());
+        }
+
+        return allItemTitles;
     }
 
     public List<ToDoItem> getItemsSortedOnPriority(String order) throws IllegalArgumentException {
-        List<ToDoItem> values = new ArrayList<>(items.values());
-        Collections.sort(values, (o1, o2) -> {
+        Collections.sort(items, (o1, o2) -> {
             if (o1.getPriority() > o2.getPriority())
                 return 1;
             else if (o1.getPriority() == o2.getPriority())
@@ -46,11 +64,11 @@ public class ToDoApp {
         });
 
         if(order.equals("desc")) {
-            Collections.reverse(values);
-            return values;
+            Collections.reverse(items);
+            return items;
         }
         else if(order.equals("asc"))
-            return values;
+            return items;
         else
             throw new IllegalArgumentException("Method must be called with argument \"asc\" or \"desc\" ");
 
