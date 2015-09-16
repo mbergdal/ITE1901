@@ -1,24 +1,18 @@
 Create an ToDoApp
 
-1. Create Classes ToDoApp and ToDoItem
-2. Create method fo add an ToDoItem (Implement this using an ArrayList)
-3. Create t
-3. Create method to remome an ToDoItem
-4. Change the implementation to use a LinkedList. All your tests should still pass without editing
-
-Make it possible to add an ToDoItem
+1. Make it possible to add an ToDoItem
     (Use an ArrayList to store items to start with)
-Make it possible to get the number of current Items
-Make it possible to remove an ToDoItem
-Make it possible to add multiple items from an existing List<ToDoItem>
+2. Make it possible to get the number of current Items
+3. Make it possible to remove an ToDoItem
+4. Make it possible to add multiple items from an existing List<ToDoItem>
     Test this with adding at least 100000 items
 
-Change your implementation to use a LinkedList. All your tests should still pass.
+5. Change your implementation to use a LinkedList. All your tests should still pass.
 
-Make it possible to remove a specific ToDoItem based on its title
-Make it possible to give each item an priority from 1 to 3
-Make it possible to get items sorted on priority (both ascending and descending)
+6. Make it possible to remove a specific ToDoItem based on its title
+7. Make it possible to give each item an priority from 1 to 3
+8. Make it possible to get items sorted on priority (both ascending and descending)
 
-Change the implementation to use a Map to store the items
-    use UUID.randomUUID(); to create a unique id in each ToDoItem
-    Make all tests pass using this new implementation
+9. Change the implementation to use a Map to store the items
+    Use the title as key and the ToDoItem as value
+    Update all tests to pass using this new implementation
