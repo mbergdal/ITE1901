@@ -1,7 +1,5 @@
 package com.headcrest.implementing;
 
-import chapter19.GenericStack;
-
 public class TestStackQueue {
   public static void main(String[] args) {
     // Create a stack

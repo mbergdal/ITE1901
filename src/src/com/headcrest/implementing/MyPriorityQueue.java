@@ -1,6 +1,6 @@
 package com.headcrest.implementing;
 
-import chapter23.Heap;
+import com.headcrest.sorting.Heap;
 
 public class MyPriorityQueue<E extends Comparable<E>> {
   private Heap<E> heap = new Heap<E>();
