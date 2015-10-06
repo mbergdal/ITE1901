@@ -23,7 +23,7 @@ public class BSTTest {
         tree.insert(6);
         tree.insert(7);
 
-        tree.inorder(sortedList, tree.root);
+        tree.inorder(sortedList);
 
         assertArrayEquals(new Integer[]{1,2,3,4,5,6,7,8}, sortedList.toArray());
     }
