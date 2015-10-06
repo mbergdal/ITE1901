@@ -1,5 +1,7 @@
 package com.headcrest.bst;
 
+import java.util.List;
+
 public interface Tree<E> extends Iterable<E> {
   /** Return true if the element is in the tree */
   public boolean search(E e);
@@ -13,13 +15,7 @@ public interface Tree<E> extends Iterable<E> {
   public boolean delete(E e);
 
   /** Inorder traversal from the root*/
-  public void inorder();
-
-  /** Postorder traversal from the root */
-  public void postorder();
-
-  /** Preorder traversal from the root */
-  public void preorder();
+  public void inorder(List<E> returnList);
 
   /** Get the number of nodes in the tree */
   public int getSize();
