@@ -25,27 +25,17 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
    * Return true if the element is inserted successfully */
   public boolean insert(E e) {
     //ToDo: 1. Implement this
-    size++;
     return true;
-  }
-
-  /** Returns a path from the root leading to the specified element */
-  public List<TreeNode<E>> path(E e) {
-    List<TreeNode<E>> list = new ArrayList<>();
-
-    //ToDo: 2. Implement this
-
-    return list;
   }
 
   /** Inorder traversal from the root*/
   public void inorder(List<E> returnList){
-    //ToDo: 3. Implement this
+    //ToDo: 2. Implement this
   }
 
   @Override /** Returns true if the element is in the tree */
   public boolean search(E e) {
-    //ToDo: 4. Implement this
+    //ToDo: 3. Implement this
     return false;
   }
 
@@ -53,13 +43,33 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
    * Return true if the element is deleted successfully
    * Return false if the element is not in the tree */
   public boolean delete(E e) {
-    //ToDo: 5. Implement this
+    //ToDo: 4. Implement this
     return true; // Element deleted successfully
   }
 
   @Override /** Get the number of nodes in the tree */
   public int getSize() {
     return size;
+  }
+
+  /** Returns a path from the root leading to the specified element */
+  public List<TreeNode<E>> path(E e) {
+    List<TreeNode<E>> list = new ArrayList<>();
+    TreeNode<E> current = root; // Start from the root
+
+    while (current != null) {
+      list.add(current); // Add the node to the list
+      if (e.compareTo(current.element) < 0) {
+        current = current.left;
+      }
+      else if (e.compareTo(current.element) > 0) {
+        current = current.right;
+      }
+      else
+        break;
+    }
+
+    return list;
   }
 
   /** Returns the root of the tree */
@@ -95,7 +105,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
     /** Inorder traversal from a subtree
      * Traverse binary tree and store elements in list */
     private void inorder(TreeNode<E> root) {
-      //ToDo: 6 Implement this
+      //ToDo: 5. Implement this
     }
 
     @Override /** More elements for traversing? */
