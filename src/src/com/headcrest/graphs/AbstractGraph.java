@@ -16,6 +16,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
         }
 
         public boolean equals(Object o) {
+
             return u == ((Edge)o).u && v == ((Edge)o).v;
         }
     }
@@ -31,6 +32,14 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     protected AbstractGraph(List<V> vertices, List<Edge> edges) {
         for (int i = 0; i < vertices.size(); i++)
             addVertex(vertices.get(i));
+
+        createAdjacencyLists(edges);
+    }
+
+    /** Construct a graph from vertices and edges stored in arrays */
+    protected AbstractGraph(V[] vertices, int[][] edges) {
+        for (int i = 0; i < vertices.length; i++)
+            addVertex(vertices[i]);
 
         createAdjacencyLists(edges);
     }
@@ -54,8 +63,17 @@ public abstract class AbstractGraph<V> implements Graph<V> {
         }
     }
 
+    /** Create adjacency lists for each vertex */
+    private void createAdjacencyLists(
+            int[][] edges) {
+        for (int i = 0; i < edges.length; i++) {
+            addEdge(edges[i][0], edges[i][1]);
+        }
+    }
+
     @Override /** Add an edge to the graph */
     public boolean addEdge(int u, int v) {
+
         return addEdge(new Edge(u, v));
     }
 
@@ -78,21 +96,25 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 
     @Override /** Return the number of vertices in the graph */
     public int getSize() {
+
         return vertices.size();
     }
 
     @Override /** Return the vertices in the graph */
     public List<V> getVertices() {
+
         return vertices;
     }
 
     @Override /** Return the object for the specified vertex */
     public V getVertex(int index) {
+
         return vertices.get(index);
     }
 
     @Override /** Return the index for the specified vertex object */
     public int getIndex(V v) {
+
         return vertices.indexOf(v);
     }
 
@@ -107,6 +129,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 
     @Override /** Return the degree for a specified vertex */
     public int getDegree(int v) {
+
         return neighbors.get(v).size();
     }
 
@@ -131,6 +154,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     @Override /** Obtain a DFS tree starting from vertex v */
     /** To be discussed in Section 28.6 */
     public Tree dfs(int v) {
+
         return null;
     }
 
@@ -142,6 +166,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
     @Override /** Starting bfs search from vertex v */
     /** To be discussed in Section 28.7 */
     public Tree bfs(int v) {
+
         return null;
     }
 
