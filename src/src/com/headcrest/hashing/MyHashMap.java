@@ -65,21 +65,44 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
   
   @Override /** Return true if this map contains the value */ 
   public boolean containsValue(V value) {
-      //TODO: Implement this
-    
+    for (int i = 0; i < capacity; i++) {
+      if (table[i] != null) {
+        LinkedList<Entry<K, V>> bucket = table[i];
+        for (Entry<K, V> entry: bucket)
+          if (entry.getValue().equals(value))
+            return true;
+      }
+    }
+
     return false;
   }
   
   @Override /** Return a set of entries in the map */
   public java.util.Set<MyMap.Entry<K,V>> entrySet() {
-      //TODO: Implement this
-    return null;
+    java.util.Set<MyMap.Entry<K, V>> set =
+            new java.util.HashSet<>();
+
+    for (int i = 0; i < capacity; i++) {
+      if (table[i] != null) {
+        LinkedList<Entry<K, V>> bucket = table[i];
+        for (Entry<K, V> entry: bucket)
+          set.add(entry);
+      }
+    }
+
+    return set;
   }
 
   @Override /** Return the value that matches the specified key */
   public V get(K key) {
     int bucketIndex = hash(key.hashCode());
-      //TODO: Implement this
+    if (table[bucketIndex] != null) {
+      LinkedList<Entry<K, V>> bucket = table[bucketIndex];
+      for (Entry<K, V> entry: bucket)
+        if (entry.getKey().equals(key))
+          return entry.getValue();
+    }
+
     return null;
   }
   
@@ -91,53 +114,70 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
   @Override /** Return a set consisting of the keys in this map */
   public java.util.Set<K> keySet() {
     java.util.Set<K> set = new java.util.HashSet<K>();
-      //TODO: Implement this
-    
+
+    for (int i = 0; i < capacity; i++) {
+      if (table[i] != null) {
+        LinkedList<Entry<K, V>> bucket = table[i];
+        for (Entry<K, V> entry: bucket)
+          set.add(entry.getKey());
+      }
+    }
+
     return set;
   }
       
   @Override /** Add an entry (key, value) into the map */
   public V put(K key, V value) {
-    //TODO: Implement this
-
     if (get(key) != null) { // The key is already in the map
       int bucketIndex = hash(key.hashCode());
-      LinkedList<Entry<K, V>> bucket = table[bucketIndex]; 
-
+      LinkedList<Entry<K, V>> bucket = table[bucketIndex];
+      for (Entry<K, V> entry: bucket)
+        if (entry.getKey().equals(key)) {
+          V oldValue = entry.getValue();
           // Replace old value with new value
-
+          entry.value = value;
           // Return the old value for the key
-
-
+          return oldValue;
+        }
     }
-  
+
     // Check load factor
     if (size >= capacity * loadFactorThreshold) {
       if (capacity == MAXIMUM_CAPACITY)
         throw new RuntimeException("Exceeding maximum capacity");
-      
+
       rehash();
     }
-    
-    int bucketIndex = hash(key.hashCode());
-    
-    // Create a linked list for the bucket if it is not created
 
+    int bucketIndex = hash(key.hashCode());
+
+    // Create a linked list for the bucket if it is not created
+    if (table[bucketIndex] == null) {
+      table[bucketIndex] = new LinkedList<Entry<K, V>>();
+    }
 
     // Add a new entry (key, value) to hashTable[index]
-
+    table[bucketIndex].add(new MyMap.Entry<K, V>(key, value));
 
     size++; // Increase size
-    
-    return value;  
+
+    return value;
   } 
  
   @Override /** Remove the entries for the specified key */
   public void remove(K key) {
     int bucketIndex = hash(key.hashCode());
-    
+
     // Remove the first entry that matches the key from a bucket
-    //TODO: Implement this
+    if (table[bucketIndex] != null) {
+      LinkedList<Entry<K, V>> bucket = table[bucketIndex];
+      for (Entry<K, V> entry: bucket)
+        if (entry.getKey().equals(key)) {
+          bucket.remove(entry);
+          size--; // Decrease size
+          break; // Remove just one entry that matches the key
+        }
+    }
   }
   
   @Override /** Return the number of entries in this map */
@@ -148,9 +188,15 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
   @Override /** Return a set consisting of the values in this map */
   public java.util.Set<V> values() {
     java.util.Set<V> set = new java.util.HashSet<>();
-    //TODO: Implement this
 
-    
+    for (int i = 0; i < capacity; i++) {
+      if (table[i] != null) {
+        LinkedList<Entry<K, V>> bucket = table[i];
+        for (Entry<K, V> entry: bucket)
+          set.add(entry.getValue());
+      }
+    }
+
     return set;
   }
   
